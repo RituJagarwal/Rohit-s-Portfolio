@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Saini - Professional Video Editor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== GLOBAL STYLES ==================== */
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --mid-gray: #2a2a2a;
+            --light-gray: #666;
+            --accent: #ff3366;
+            --accent-glow: rgba(255, 51, 102, 0.3);
+            --white: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 51, 102, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(51, 102, 255, 0.05) 0%, transparent 50%);
+            animation: bgShift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, 20px) scale(1.05); }
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95), transparent);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--white), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* ==================== 1. HERO SECTION ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 4rem 4rem;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            letter-spacing: 4px;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content .role {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-secondary:hover {
+            color: var(--black);
+        }
+
+        .btn-secondary:hover::before {
+            left: 0;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 50px var(--accent-glow);
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* ==================== SECTION COMMON STYLES ==================== */
+        section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--light-gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: -2rem auto 3rem;
+        }
+
+        /* ==================== 2. ABOUT SECTION ==================== */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-intro {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--light-gray);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .about-skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-item {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-left: 3px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateX(10px);
+            box-shadow: -5px 0 20px var(--accent-glow);
+        }
+
+        .skill-item h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        /* ==================== 3. SERVICES SECTION ==================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--dark-gray);
+            padding: 2.5rem;
+            border: 1px solid var(--mid-gray);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ==================== 4. PORTFOLIO SECTION ==================== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background: var(--dark-gray);
+            border: 1px solid var(--mid-gray);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .watch-btn {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: var(--black);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .watch-btn:hover {
+            background: var(--white);
+        }
+
+        /* ==================== 5. SHOWREEL SECTION ==================== */
+        .showreel {
+            background: var(--dark-gray);
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+
+        .showreel-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .showreel-video {
+            aspect-ratio: 16/9;
+            background: var(--mid-gray);
+            margin: 2rem auto;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--light-gray);
+        }
+
+        /* ==================== 6. SKILLS/TOOLS SECTION ==================== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: var(--dark-gray);
+            padding: 2rem 1.5rem;
+            border: 1px solid var(--mid-gray);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        /* ==================== 7. PROCESS SECTION ==================== */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .process-step h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .process-step p {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+        }
+
+        /* ==================== 8. TESTIMONIALS SECTION ==================== */
+        .testimonials {
+            background: var(--dark-gray);
+            padding: 6rem 4rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--mid-gray);
+            padding: 2.5rem;
+            border-left: 3px solid var(--accent);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-family: serif;
+        }
+
+        .testimonial-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: var(--light-gray);
+        }
+
+        /* ==================== 9. CONTACT SECTION ==================== */
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: var(--light-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            background: var(--dark-gray);
+            border: 1px solid var(--mid-gray);
+            color: var(--white);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            padding: 1rem 2.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: var(--black);
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            background: var(--dark-gray);
+            padding: 1.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .contact-item h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .cta-text {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--light-gray);
+            margin-top: 3rem;
+            font-style: italic;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--dark-gray);
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image img {
+                max-width: 400px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 2rem;
+            }
+
+            .hero {
+                padding: 6rem 2rem 4rem;
+            }
+
+            .portfolio-grid,
+            .services-grid,
+            .tools-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav>
+        <div class="logo">ROHIT SAINI</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ==================== 1. HERO SECTION ==================== -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>ROHIT SAINI</h1>
+                <p class="role">Professional Video Editor</p>
+                <p class="tagline">Hi, I'm Rohit Saini — a Video Editor crafting engaging stories for creators and brands.</p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn btn-primary">View Work</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Replace this placeholder with your photo -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Narendra_Modi_portrait_2024.jpg/800px-Narendra_Modi_portrait_2024.jpg" alt="Rohit Saini">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 2. ABOUT SECTION ==================== -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p class="about-intro">
+                I'm a motivated and creative video editor with expertise in visual storytelling and modern editing styles. 
+                I specialize in crafting clean, engaging videos for social media platforms using industry-standard tools like 
+                Premiere Pro and CapCut. With a fast-learning mindset and passion for improvement, I deliver high-quality 
+                content that resonates with audiences and meets tight deadlines.
+            </p>
+            <div class="about-skills">
+                <div class="skill-item">
+                    <h3>Storytelling</h3>
+                    <p>Crafting compelling narratives that engage and captivate viewers from start to finish.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Pacing</h3>
+                    <p>Perfect timing and rhythm to maintain viewer interest and emotional impact.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Transitions</h3>
+                    <p>Smooth, creative transitions that enhance flow and visual appeal.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Color Grading</h3>
+                    <p>Professional color correction and grading to set the perfect mood and aesthetic.</p>
+                </div>
+                <div class="skill-item">
+                    <h3>Sound Design</h3>
+                    <p>Audio cleanup, mixing, and enhancement for professional-quality sound.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. SERVICES SECTION ==================== -->
+    <section id="services">
+        <h2 class="section-title">Services</h2>
+        <p class="section-subtitle">Professional video editing services tailored to your needs</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>YouTube Video Editing</h3>
+                <p>Complete editing for YouTube content including intros, outros, lower thirds, and engaging cuts that keep viewers watching.</p>
+            </div>
+            <div class="service-card">
+                <h3>Reels / Shorts / TikTok</h3>
+                <p>Fast-paced, trend-focused editing optimized for social media platforms to maximize engagement and virality.</p>
+            </div>
+            <div class="service-card">
+                <h3>Promotional Ads</h3>
+                <p>Eye-catching promotional videos for businesses and brands that drive conversions and brand awareness.</p>
+            </div>
+            <div class="service-card">
+                <h3>Motion Graphics</h3>
+                <p>Dynamic titles, intros, and animated elements that add professional polish to your videos.</p>
+            </div>
+            <div class="service-card">
+                <h3>Color Grading</h3>
+                <p>Professional color correction and cinematic grading to elevate your video's visual appeal.</p>
+            </div>
+            <div class="service-card">
+                <h3>Subtitles & Captions</h3>
+                <p>Accurate, stylish subtitles and captions to increase accessibility and viewer retention.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. PORTFOLIO SECTION ==================== -->
+    <section id="portfolio">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-subtitle">A showcase of my best work across various platforms and styles</p>
+        <div class="portfolio-grid">
+            <!-- Project 1 -->
+            <div class="portfolio-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ff3366;stop-opacity:0.3'/%3E%3Cstop offset='100%25' style='stop-color:%233366ff;stop-opacity:0.3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='%231a1a1a'/%3E%3Crect width='800' height='450' fill='url(%23g1)'/%3E%3C/svg%3E" alt="Instagram Reel">
+                <div class="portfolio-overlay">
+                    <h3>Instagram Reel - Viral Content</h3>
+                    <p>Fast-paced editing with trending transitions and effects. 500K+ views.</p>
+                    <button class="watch-btn">Watch Video</button>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="portfolio-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='100%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233366ff;stop-opacity:0.3'/%3E%3Cstop offset='100%25' style='stop-color:%2366ff33;stop-opacity:0.3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='%231a1a1a'/%3E%3Crect width='800' height='450' fill='url(%23g2)'/%3E%3C/svg%3E" alt="YouTube Video">
+                <div class="portfolio-overlay">
+                    <h3>YouTube Video - Tech Review</h3>
+                    <p>Complete editing with B-roll, graphics, and professional pacing.</p>
+                    <button class="watch-btn">Watch Video</button>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="portfolio-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='100%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%2366ff33;stop-opacity:0.3'/%3E%3Cstop offset='100%25' style='stop-color:%23ff3366;stop-opacity:0.3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='%231a1a1a'/%3E%3Crect width='800' height='450' fill='url(%23g3)'/%3E%3C/svg%3E" alt="Business Promo">
+                <div class="portfolio-overlay">
+                    <h3>Business Promotional Video</h3>
+                    <p>High-impact promo for a local business with motion graphics and testimonials.</p>
+                    <button class="watch-btn">Watch Video</button>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="portfolio-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cdefs%3E%3CradialGradient id='g4'%3E%3Cstop offset='0%25' style='stop-color:%23ff3366;stop-opacity:0.4'/%3E%3Cstop offset='100%25' style='stop-color:%231a1a1a;stop-opacity:1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='%231a1a1a'/%3E%3Crect width='800' height='450' fill='url(%23g4)'/%3E%3C/svg%3E" alt="TikTok Short">
+                <div class="portfolio-overlay">
+                    <h3>TikTok Short - Dance Edit</h3>
+                    <p>Beat-synced editing with trendy effects and color grading.</p>
+                    <button class="watch-btn">Watch Video</button>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="portfolio-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cdefs%3E%3CradialGradient id='g5'%3E%3Cstop offset='0%25' style='stop-color:%233366ff;stop-opacity:0.4'/%3E%3Cstop offset='100%25' style='stop-color:%231a1a1a;stop-opacity:1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='%231a1a1a'/%3E%3Crect width='800' height='450' fill='url(%23g5)'/%3E%3C/svg%3E" alt="Product Launch">
+                <div class="portfolio-overlay">
+                    <h3>Product Launch Video</h3>
+                    <p>Cinematic product showcase with motion graphics and dramatic reveals.</p>
+                    <button class="watch-btn">Watch Video</button>
+                </div>
+            </div>
+            
+            <!-- Project 6 -->
+            <div class="portfolio-item">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450'%3E%3Cdefs%3E%3CradialGradient id='g6'%3E%3Cstop offset='0%25' style='stop-color:%2366ff33;stop-opacity:0.4'/%3E%3Cstop offset='100%25' style='stop-color:%231a1a1a;stop-opacity:1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='800' height='450' fill='%231a1a1a'/%3E%3Crect width='800' height='450' fill='url(%23g6)'/%3E%3C/svg%3E" alt="Event Highlights">
+                <div class="portfolio-overlay">
+                    <h3>Event Highlights Reel</h3>
+                    <p>Dynamic montage of event footage with music sync and smooth transitions.</p>
+                    <button class="watch-btn">Watch Video</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. SHOWREEL SECTION ==================== -->
+    <section class="showreel">
+        <div class="showreel-content">
+            <h2 class="section-title">Demo Reel</h2>
+            <p class="section-subtitle">A 60-90 second showcase of my best work across all projects</p>
+            <div class="showreel-video">
+                <!-- Replace with YouTube/Vimeo embed -->
+                <p>🎬 Demo Reel Video (YouTube/Vimeo Embed)</p>
+            </div>
+            <p style="color: var(--light-gray); margin-top: 1.5rem;">
+                This showreel represents the highlights of my editing journey, showcasing various styles, 
+                techniques, and the creative range I bring to every project.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== 6. SKILLS/TOOLS SECTION ==================== -->
+    <section id="skills">
+        <h2 class="section-title">Skills & Tools</h2>
+        <p class="section-subtitle">Professional software and expertise I use to bring your vision to life</p>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🎬</div>
+                <h3>Premiere Pro</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">✂️</div>
+                <h3>CapCut</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🎨</div>
+                <h3>Photoshop</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🖼️</div>
+                <h3>Canva</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">📖</div>
+                <h3>Storytelling</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🎵</div>
+                <h3>Sound Design</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">🌈</div>
+                <h3>Color Grading</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">✨</div>
+                <h3>Motion Graphics</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7. PROCESS SECTION ==================== -->
+    <section id="process">
+        <h2 class="section-title">My Process</h2>
+        <p class="section-subtitle">A streamlined 4-step workflow to deliver exceptional results</p>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="process-number">01</div>
+                <h3>Discuss Project</h3>
+                <p>Understanding your vision, goals, and requirements to align on creative direction.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">02</div>
+                <h3>Edit & Enhance</h3>
+                <p>Crafting the story with precise cuts, effects, color grading, and sound design.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">03</div>
+                <h3>Client Review</h3>
+                <p>Sharing the draft for your feedback and making necessary revisions.</p>
+            </div>
+            <div class="process-step">
+                <div class="process-number">04</div>
+                <h3>Final Delivery</h3>
+                <p>Delivering the polished final video in your preferred format and resolution.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 8. TESTIMONIALS SECTION ==================== -->
+    <section class="testimonials">
+        <h2 class="section-title">What Clients Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Rohit delivered exactly what we needed for our social media campaign. His editing style 
+                    is modern and engaging. Highly recommend!"
+                </p>
+                <p class="testimonial-author">Priya Sharma</p>
+                <p class="testimonial-role">Marketing Manager</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Fast turnaround, great communication, and professional results. Rohit turned our raw 
+                    footage into something truly special."
+                </p>
+                <p class="testimonial-author">Arjun Mehta</p>
+                <p class="testimonial-role">Content Creator</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">
+                    "Working with Rohit was a breeze. He understood our brand and delivered a promo video 
+                    that exceeded our expectations."
+                </p>
+                <p class="testimonial-author">Neha Gupta</p>
+                <p class="testimonial-role">Business Owner</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 9. CONTACT SECTION ==================== -->
+    <section id="contact">
+        <h2 class="section-title">Let's Work Together</h2>
+        <div class="contact-container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <a href="mailto:rohitsaini15229@gmail.com">rohitsaini15229@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/919306115229">+91 93061-15229</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Location</h3>
+                        <p>Hisar, Haryana, India</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="https://instagram.com/yourusername" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="YouTube">▶️</a>
+                <a href="#" aria-label="TikTok">🎵</a>
+                <a href="mailto:rohitsaini15229@gmail.com" aria-label="Email">✉️</a>
+            </div>
+
+            <!-- CTA Text -->
+            <p class="cta-text">Let's create something amazing together.</p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <p>&copy; 2024 Rohit Saini. All rights reserved.</p>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
