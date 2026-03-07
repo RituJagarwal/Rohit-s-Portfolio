@@ -797,7 +797,7 @@ footer {
     .hero-container { grid-template-columns: 1fr; gap: 2rem; }
     .hero-content { order: 2; }
     .hero-profile { order: 1; }
-    .profile-frame { max-width: 220px; }
+    .profile-frame { max-width: 280px; }
     .hero-buttons { justify-content: center; }
     .hero-content .tagline { font-size: 1rem; }
 
@@ -844,7 +844,7 @@ footer {
 @media (max-width: 480px) {
 
     .hero { padding: 5.5rem 1.2rem 2.5rem; }
-    .profile-frame { max-width: 180px; }
+    .profile-frame { max-width: 230px; }
     .hero-content h1 { font-size: 2.8rem; }
     .hero-content .role { font-size: 0.85rem; letter-spacing: 2px; }
     .hero-buttons .btn { padding: 0.8rem 1.8rem; font-size: 0.85rem; }
@@ -866,4 +866,5 @@ footer {
     footer { font-size: 0.8rem; }
 
     .mobile-nav a { font-size: 2rem; }
+
 }
