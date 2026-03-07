@@ -10,6 +10,9 @@
             --accent-hover: #4f46e5;
             --accent-glow: rgba(99, 102, 241, 0.2);
             --border-color: rgba(99, 102, 241, 0.15);
+            --card-radius: 18px;      /* ✏️ Corner rounding of each reel card */
+            --section-py: 60px;
+            --gap: 20px;
         }
 
         * {
@@ -364,91 +367,125 @@
         }
 
         /* ==================== 3. PORTFOLIO SECTION ==================== */
-        #portfolio {
-            padding: 6rem 4rem;
-            background: var(--light-bg);
-        }
+        .reel-section {
+      background: var(--bg-teal);
+      padding: var(--section-py) 40px;
+    }
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    /* ============================================================
+      SECTION HEADER
+    ============================================================ */
+    .reel-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
 
-        .portfolio-item {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border-color);
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
+    /* ✏️ Edit heading text in the HTML below */
+    .reel-header h2 {
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
 
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px var(--accent-glow);
-            border-color: var(--accent);
-        }
+    /* ============================================================
+      REELS GRID — 3 columns
+    ============================================================ */
+    .reels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-        .portfolio-image {
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, var(--mid-gray) 0%, var(--lighter-bg) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
+    @media (max-width: 860px) {
+      .reels-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .reels-grid { grid-template-columns: 1fr; }
+    }
 
-        .portfolio-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
-            transition: left 0.5s;
-        }
+    /* ============================================================
+      REEL CARD
+    ============================================================ */
+    .reel-card {
+      position: relative;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      /* Aspect ratio to match portrait reel — like the screenshot */
+      aspect-ratio: 9 / 13;
+      background: #0d2e2a;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      transition: transform 0.35s cubic-bezier(.22,.68,0,1.2),
+                  box-shadow 0.35s ease;
+    }
 
-        .portfolio-item:hover .portfolio-image::before {
-            left: 100%;
-        }
+    .reel-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.38);
+    }
 
-        .portfolio-info {
-            padding: 2rem;
-        }
+    /* ---------- GOOGLE DRIVE / VIDEO IFRAME ---------- */
+    .reel-card iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+      pointer-events: none;   /* prevents iframe stealing the hover; set to auto if you want clickable */
+    }
 
-        .portfolio-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
 
-        .portfolio-info p {
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
+    .reel-card:hover .reel-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-        .portfolio-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
+    /* Hide the simple bottom tag on hover so overlay text takes over */
+    .reel-card:hover .reel-tag {
+      opacity: 0;
+    }
 
-        .tag {
-            padding: 0.4rem 1rem;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            border: 1px solid var(--border-color);
-        }
+    .reel-card:hover .overlay-content {
+      transform: translateY(0);
+    }
+    /* ---------- PLAY ICON (visible when not hovering) ---------- */
+    .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 54px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(4px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      transition: opacity 0.3s, transform 0.3s;
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+
+    .reel-card:hover .play-icon {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .play-icon svg { margin-left: 4px; }
+
+    /* ============================================================
+      ENABLE IFRAME INTERACTION ON CLICK
+    ============================================================ */
+    .reel-card.playing iframe { pointer-events: auto; }
+    .reel-card.playing .play-icon { display: none; }
+    .reel-card.playing .reel-overlay { pointer-events: none; opacity: 0 !important; }
+    .reel-card.playing .reel-tag { opacity: 0; }
+
 
         /* ==================== 4. SKILLS SECTION ==================== */
         #skills {
@@ -555,67 +592,6 @@
         .service-card p {
             color: var(--text-gray);
             line-height: 1.7;
-        }
-
-        /* ==================== 6. SHOWREEL SECTION ==================== */
-        .showreel {
-            padding: 6rem 4rem;
-            background: var(--white);
-        }
-
-        .showreel-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .showreel-video {
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, var(--mid-gray) 0%, var(--lighter-bg) 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 3rem 0;
-            font-size: 2rem;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .play-button {
-            width: 100px;
-            height: 100px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-            position: absolute;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .play-button:hover {
-            background: var(--accent-hover);
-            transform: scale(1.15);
-        }
-
-        .play-button::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 25px solid white;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            margin-left: 5px;
         }
 
         /* ==================== 7. PROCESS SECTION ==================== */
@@ -910,4 +886,8 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        .hero {
+        padding-top: 120px;
+    }
     

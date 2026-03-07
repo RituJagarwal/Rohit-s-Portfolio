@@ -30,5 +30,30 @@
         document.querySelectorAll('.fade-in').forEach(element => {
             observer.observe(element);
         });
+  
+  // Click on a card to activate the video (enables iframe interaction)
+  // Click again anywhere outside to deactivate
+  function activateReel(card) {
+    // If already playing, do nothing (let iframe handle)
+    if (card.classList.contains('playing')) return;
+
+    // Deactivate any other playing cards
+    document.querySelectorAll('.reel-card.playing')
+      .forEach(c => c.classList.remove('playing'));
+
+    card.classList.add('playing');
+  }
+
+  // Click outside cards to reset
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.reel-card')) {
+      document.querySelectorAll('.reel-card.playing')
+        .forEach(c => c.classList.remove('playing'));
+    }
+  });
 
        
+
+
+
+        
